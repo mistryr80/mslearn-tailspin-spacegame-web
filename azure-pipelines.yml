@@ -16,13 +16,13 @@ variables:
 
 steps:
 - task: UseDotNet@2
-  displayname: 'Use .NET Core SDK 3.1.300'
+  displayName: 'Use .NET Core SDK 3.1.300'
   inputs:
-    packagetype: sdk
-    version:3.1.300
+    packageType: sdk
+    version: 3.1.300
 
 - task: Npm@1
-  displayName: 'Run NPM Install'
+  displayName: 'Run npm install'
   inputs:
     verbose: false
 
@@ -34,16 +34,16 @@ steps:
 
 - script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt'
   displayName: 'Write build info'
-  workingdirectory: Tailspin.SpaceGame.Web/wwwroot
+  workingDirectory: Tailspin.SpaceGame.Web/wwwroot
 
 - task: DotNetCoreCLI@2
-  displayName: 'Restore Project Dependencies'
+  displayName: 'Restore project dependencies'
   inputs:
-    Command: ' restore'
+    command: 'restore'
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Build the project Release'
+  displayName: 'Build the project - Release'
   inputs:
     command: 'build'
     arguments: '--no-restore --configuration Release'
